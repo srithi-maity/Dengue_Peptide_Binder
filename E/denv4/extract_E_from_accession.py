@@ -1,102 +1,17 @@
 #!/usr/bin/env python3
 """
-Get COMPLETE E protein sequences from NCBI Protein database.
+Get COMPLETE E protein sequences from NCBI Protein database for DENV4.
 Direct approach - avoids genome extraction issues.
 """
 
 from Bio import Entrez, SeqIO
-from Bio.SeqRecord import SeqRecord
 import time
 import sys
 
 
-def search_and_download_e_proteins(accession_ids, email, batch_size=20):
-    """
-    Search for E protein sequences in NCBI Protein database.
-    """
-    Entrez.email = email
-    Entrez.api_key = None
-
-    all_e_proteins = []
-    failed_accessions = []
-
-    print(f"Searching for E protein sequences for {len(accession_ids)} DENV4 genomes...")
-
-    for i in range(0, len(accession_ids), batch_size):
-        batch = accession_ids[i:i + batch_size]
-        batch_num = i // batch_size + 1
-        total_batches = (len(accession_ids) - 1) // batch_size + 1
-
-        print(f"\nBatch {batch_num}/{total_batches}: {len(batch)} genomes")
-
-        try:
-            # Search for protein sequences linked to these nucleotide accessions
-            search_term = " OR ".join([f'{acc}[Nucleotide Accession]' for acc in batch])
-            search_term += " AND dengue[Organism] AND envelope[Title]"
-
-            # Search in protein database
-            handle = Entrez.esearch(
-                db="protein",
-                term=search_term,
-                retmax=batch_size * 5,  # Allow multiple proteins per genome
-                retmode="xml"
-            )
-
-            search_results = Entrez.read(handle)
-            handle.close()
-
-            if not search_results['IdList']:
-                print(f"  No E proteins found for this batch")
-                continue
-
-            # Fetch the protein sequences
-            protein_ids = search_results['IdList']
-            handle = Entrez.efetch(
-                db="protein",
-                id=",".join(protein_ids),
-                rettype="fasta",
-                retmode="text"
-            )
-
-            protein_records = list(SeqIO.parse(handle, "fasta"))
-            handle.close()
-
-            # Filter for DENV4 E proteins
-            batch_e_proteins = []
-            for record in protein_records:
-                desc = record.description.lower()
-
-                # Check if it's DENV4 E protein
-                is_denv4 = ('denv-4' in desc or 'dengue virus 4' in desc or
-                            'dengue virus type 4' in desc or 'denv4' in desc)
-
-                is_e_protein = ('envelope' in desc or 'glycoprotein e' in desc or
-                                ' e protein' in desc)
-
-                # Check length (E protein should be ~495 aa)
-                length_ok = 450 <= len(record.seq) <= 550
-
-                if is_denv4 and is_e_protein and length_ok:
-                    batch_e_proteins.append(record)
-                    print(f"  ✓ Found: {record.id} ({len(record.seq)} aa)")
-
-            all_e_proteins.extend(batch_e_proteins)
-            print(f"  Found {len(batch_e_proteins)} valid E proteins in this batch")
-
-        except Exception as e:
-            print(f"  Error: {e}")
-            failed_accessions.extend(batch)
-
-        # Respect NCBI rate limits
-        if i + batch_size < len(accession_ids):
-            time.sleep(1)
-
-    return all_e_proteins, failed_accessions
-
-
 def direct_protein_access(accession_ids, email):
     """
-    Alternative: Direct search for E proteins without genome extraction.
+    Direct search for E proteins without genome extraction.
     """
     Entrez.email = email
 
@@ -110,13 +25,7 @@ def direct_protein_access(accession_ids, email):
 
     try:
         # First, search
-        handle = Entrez.esearch(
-            db="protein",
-            term=search_term,
-            retmax=10000,  # Large enough
-            sort="relevance"
-        )
-
+        handle = Entrez.esearch(db="protein",term=search_term,retmax=10000,sort="relevance")
         results = Entrez.read(handle)
         handle.close()
 
@@ -128,14 +37,7 @@ def direct_protein_access(accession_ids, email):
         for i in range(0, protein_count, batch_size):
             batch_ids = results['IdList'][i:i + batch_size]
             print(f"Fetching batch {i // batch_size + 1}/{(protein_count - 1) // batch_size + 1}")
-
-            handle = Entrez.efetch(
-                db="protein",
-                id=",".join(batch_ids),
-                rettype="fasta",
-                retmode="text"
-            )
-
+            handle = Entrez.efetch(db="protein",id=",".join(batch_ids),rettype="fasta",retmode="text")
             batch_records = list(SeqIO.parse(handle, "fasta"))
             handle.close()
 
@@ -197,7 +99,7 @@ def deduplicate_proteins(protein_records):
 
 def main():
     # Configuration
-    EMAIL = "your_email@example.com"  # CHANGE THIS!
+    EMAIL = "maitysrithi@gmail.com"  # Already set to your email
 
     # Read accession IDs
     with open("DENV4_accession_ids.txt", "r") as f:
@@ -205,9 +107,9 @@ def main():
 
     print(f"Loaded {len(accession_ids)} DENV4 accession IDs")
 
-    # OPTION 1: Direct protein search (recommended)
+    # Direct protein search (only option)
     print("\n" + "=" * 60)
-    print("OPTION 1: Direct search for E proteins in Protein database")
+    print("DIRECT SEARCH FOR E PROTEINS IN PROTEIN DATABASE")
     print("=" * 60)
 
     e_proteins = direct_protein_access(accession_ids, EMAIL)
@@ -218,13 +120,13 @@ def main():
 
         # Save all found proteins
         SeqIO.write(e_proteins, "DENV4_E_proteins_direct_search.fasta", "fasta")
-        print(f"\n✅ Saved {len(e_proteins)} E proteins to DENV4_E_proteins_direct_search.fasta")
+        print(f"\nSaved {len(e_proteins)} E proteins to DENV4_E_proteins_direct_search.fasta")
 
         # Filter for complete ones (~495 aa)
         complete_e = [rec for rec in e_proteins if 480 <= len(rec.seq) <= 510]
         if complete_e:
             SeqIO.write(complete_e, "DENV4_E_proteins_complete.fasta", "fasta")
-            print(f"✅ Saved {len(complete_e)} complete E proteins (480-510 aa)")
+            print(f"Saved {len(complete_e)} complete E proteins (480-510 aa)")
 
         # Create a summary
         with open("DENV4_E_proteins_summary.txt", "w") as f:
@@ -243,7 +145,7 @@ def main():
                 f.write(f"Min: {min(lengths)} aa\n")
                 f.write(f"Max: {max(lengths)} aa\n")
 
-        print(f"\n📊 STATISTICS:")
+        print(f"\nSTATISTICS:")
         print(f"  Total E proteins: {len(e_proteins)}")
         print(f"  Complete (480-510 aa): {len(complete_e)}")
 
@@ -252,29 +154,12 @@ def main():
             print(f"  Length range: {min(lengths)} - {max(lengths)} aa")
 
     else:
-        print("\n❌ No E proteins found!")
+        print("\nNo E proteins found!")
 
-    # OPTION 2: Try linking to nucleotide accessions
     print("\n" + "=" * 60)
-    print("OPTION 2: Search via nucleotide accession links")
+    print("ANALYSIS COMPLETE!")
     print("=" * 60)
-
-    linked_e_proteins, failed = search_and_download_e_proteins(
-        accession_ids[:50],  # Try first 50 as test
-        EMAIL,
-        batch_size=10
-    )
-
-    if linked_e_proteins:
-        SeqIO.write(linked_e_proteins, "DENV4_E_proteins_linked.fasta", "fasta")
-        print(f"\n✅ Saved {len(linked_e_proteins)} linked E proteins")
 
 
 if __name__ == "__main__":
-    try:
-        from Bio import Entrez, SeqIO
-    except ImportError:
-        print("Error: Biopython is required. Install with: pip install biopython")
-        sys.exit(1)
-
     main()
