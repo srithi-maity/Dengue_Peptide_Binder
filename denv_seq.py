@@ -139,7 +139,7 @@ def main():
         print(f"\n Processing {serotype}")
 
         id_list = search_complete_genomes(virus_name)
-        print(f"  → Found {len(id_list)} complete genomes")
+        print(f"  Found {len(id_list)} complete genomes")
 
         if len(id_list) == 0:
             print("  No complete genomes found")
@@ -173,16 +173,6 @@ def main():
     print(f"Summary file: {os.path.join(OUTPUT_DIR, 'download_summary.txt')}")
     print(f"All accession IDs: {os.path.join(OUTPUT_DIR, 'all_accession_ids.txt')}")
 
-    # Print file structure
-    print(f"\nFile structure:")
-    print(f"{OUTPUT_DIR}/")
-    print(f"├── download_summary.txt")
-    print(f"├── all_accession_ids.txt")
-    for serotype in SEROTYPES.keys():
-        print(f"├── {serotype}/")
-        print(f"│   ├── {serotype}_complete.fasta")
-        print(f"│   ├── {serotype}_metadata.csv")
-        print(f"│   └── {serotype}_accession_ids.txt")
 
 
 if __name__ == "__main__":
