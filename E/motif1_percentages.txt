@@ -1,0 +1,23 @@
+============================================================
+MOTIF PRESENCE IN DENV SEROTYPES
+Motif: VDRGWGNGCGLFGKG
+============================================================
+
+SEROTYPE	TOTAL_SEQ	WITH_MOTIF	PERCENTAGE
+------------------------------------------------------------
+DENV1	1373	1350	98.3%
+DENV2	851	832	97.8%
+DENV3	493	479	97.2%
+DENV4	366	361	98.6%
+
+============================================================
+SUMMARY
+============================================================
+
+Highest motif presence: DENV4 (98.6%)
+Lowest motif presence: DENV3 (97.2%)
+
+Overall across all serotypes:
+  Total sequences analyzed: 3083
+  Total with motif: 3022
+  Overall percentage: 98.0%
