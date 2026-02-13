@@ -1,0 +1,66 @@
+Verifying DENV1 E protein sequences...
+==================================================
+Total sequences in input: 1373
+
+STATISTICS:
+Total sequences processed: 1373
+Complete sequences: 1219
+Marked as partial: 1369
+Skipped (unknown residues): 0
+Skipped (bad length): 0
+Saved to DENV1_E_proteins_verified.fasta: 1219
+
+START CODON ANALYSIS:
+Start with methionine (M): 1191
+Don't start with M: 28
+
+
+Verifying DENV2 E protein sequences...
+==================================================
+Total sequences in input: 851
+
+STATISTICS:
+Total sequences processed: 851
+Complete sequences: 851
+Marked as partial: 841
+Skipped (unknown residues): 0
+Skipped (bad length): 0
+Saved to DENV2_E_proteins_verified.fasta: 851
+
+START CODON ANALYSIS:
+Start with methionine (M): 848
+Don't start with M: 3
+
+
+Verifying DENV3 E protein sequences...
+==================================================
+Total sequences in input: 493
+
+STATISTICS:
+Total sequences processed: 493
+Complete sequences: 493
+Marked as partial: 492
+Skipped (unknown residues): 0
+Skipped (bad length): 0
+Saved to DENV3_E_proteins_verified.fasta: 493
+
+START CODON ANALYSIS:
+Start with methionine (M): 493
+Don't start with M: 0
+
+
+Verifying DENV4 E protein sequences...
+==================================================
+Total sequences in input: 366
+
+STATISTICS:
+Total sequences processed: 366
+Complete sequences: 366
+Marked as partial: 364
+Skipped (unknown residues): 0
+Skipped (bad length): 0
+Saved to DENV4_E_proteins_verified.fasta: 366
+
+START CODON ANALYSIS:
+Start with methionine (M): 361
+Don't start with M: 5

@@ -1,0 +1,115 @@
+DENV3 E PROTEIN - CONSERVED REGIONS (≥99% conservation)
+================================================================================
+
+Region 1:
+  Positions: 4-20
+  Length: 17 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.2%-100.0%
+  Sequence: VGVGNRDFVEGLSGATW
+
+Region 2:
+  Positions: 22-36
+  Length: 15 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.6%-100.0%
+  Sequence: DVVLEHGGCVTTMAK
+
+Region 3:
+  Positions: 38-49
+  Length: 12 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.6%-100.0%
+  Sequence: KPTLDIELQKTE
+
+Region 4:
+  Positions: 51-67
+  Length: 17 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.2%-100.0%
+  Sequence: TQLATLRKLCIEGKITN
+
+Region 5:
+  Positions: 69-80
+  Length: 12 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.2%-100.0%
+  Sequence: TTDSRCPTQGEA
+
+Region 6:
+  Positions: 82-123
+  Length: 42 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.2%-100.0%
+  Sequence: LPEEQDQNYVCKHTYVDRGWGNGCGLFGKGSLVTCAKFQCLE
+
+Region 7:
+  Positions: 141-153
+  Length: 13 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.4%-100.0%
+  Sequence: ITVHTGDQHQVGN
+
+Region 8:
+  Positions: 176-200
+  Length: 25 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.4%-100.0%
+  Sequence: YGTLGLECSPRTGLDFNEMILLTMK
+
+Region 9:
+  Positions: 202-211
+  Length: 10 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.6%-100.0%
+  Sequence: KAWMVHRQWF
+
+Region 10:
+  Positions: 232-269
+  Length: 38 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.4%-100.0%
+  Sequence: KELLVTFKNAHAKKQEVVVLGSQEGAMHTALTGATEIQ
+
+Region 11:
+  Positions: 272-297
+  Length: 26 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.2%-100.0%
+  Sequence: GGTSIFAGHLKCRLKMDKLELKGMSY
+
+Region 12:
+  Positions: 304-328
+  Length: 25 amino acids
+  Average conservation: 99.7%
+  Conservation range: 99.2%-100.0%
+  Sequence: FVLKKEVSETQHGTILIKVEYKGED
+
+Region 13:
+  Positions: 364-374
+  Length: 11 amino acids
+  Average conservation: 99.9%
+  Conservation range: 99.4%-100.0%
+  Sequence: NIEAEPPFGES
+
+Region 14:
+  Positions: 392-401
+  Length: 10 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.6%-100.0%
+  Sequence: KGSSIGKMFE
+
+Region 15:
+  Positions: 403-429
+  Length: 27 amino acids
+  Average conservation: 99.8%
+  Conservation range: 99.2%-100.0%
+  Sequence: TARGARRMAILGDTAWDFGSVGGVLNS
+
+Region 16:
+  Positions: 460-470
+  Length: 11 amino acids
+  Average conservation: 99.7%
+  Conservation range: 99.4%-100.0%
+  Sequence: LLTWIGLNSKN
+
