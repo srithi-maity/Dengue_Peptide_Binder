@@ -1,0 +1,1 @@
+Here i have not uploaded the RFdiffusion folder , where in uotputs subfolder there are all the 200 pdb files generated from the Scaffold_gen_RFdifffusion.py file . 
