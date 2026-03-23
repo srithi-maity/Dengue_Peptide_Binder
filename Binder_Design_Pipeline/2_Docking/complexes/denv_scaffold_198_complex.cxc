@@ -1,0 +1,40 @@
+# ChimeraX script for denv_scaffold_198_complex
+# Colors: Target (Chain A) - Blue, Binder (Chain B) - Green, Motif (97-111) - Red
+
+open denv_scaffold_198_complex.pdb
+
+# Color by chain
+color chain A #90caf9      # Light blue for target
+color chain B #66bb6a      # Light green for binder
+
+# Color motif (residues 97-111) in red
+color /A:97-111 red
+
+# Show representations
+cartoon style /A helix
+show /A cartoon
+show /B sticks
+
+# Highlight motif
+show /A:97-111 sticks
+show /A:97-111 spheres
+size /A:97-111 sphereScale 0.3
+
+# Label motif
+label /A:97-111 text "Motif 97-111"
+label /A:97-111 textColor black
+label /A:97-111 bgColor white
+
+# Focus on binding site
+view /B
+view /A:97-111
+
+# Save image
+save denv_scaffold_198_complex.png width 1600 height 1200 transparentBackground false
+
+# Print info
+log info "=== Visualization Summary ==="
+log info "Target (Chain A): Blue"
+log info "Binder (Chain B): Green"
+log info "Motif (97-111): Red"
+log info "=============================="
